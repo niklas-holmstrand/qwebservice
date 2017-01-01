@@ -20,13 +20,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT message, time FROM myposts";
+$sql = "SELECT id, message, time FROM myposts";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"]. " - Name: " . $row["message"]. " " . $row["time"]. "  <a href='delete.php'>Delete</a><br>";
+        $msg = $row["message"];
+        echo "id: " . $row["id"]. " - Name: " . $msg . " " . $row["time"]. "  <a href=delete.php?id=" . $row["id"] . ">Delete</a><br>";
     }
 } else {
     echo "0 results";
