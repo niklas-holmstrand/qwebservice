@@ -17,24 +17,15 @@ time: <?php echo $_POST["Time"]; ?>
 
 echo ".........0 <br/>";
 
-$servername = "x-stress.se.mysql";
-$username = "x_stress_se";
-$password = "hAYwYZMC";
-$dbname = "x_stress_se";
+include 'db-connect.php';
 
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $message=$_POST["Message"];
 //$time=$_POST["Time"];
 
 $time = date("Y-m-d h:i:sa");
 
+$conn = db_connect();
 $sql = "INSERT INTO myposts (message, time)
 VALUES ('$message', '$time')";
 

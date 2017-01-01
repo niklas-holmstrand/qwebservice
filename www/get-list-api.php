@@ -5,21 +5,9 @@
 <h1>Alla poster:</h1>
 
 <?php
-echo ".........0 <br/>";
+include 'db-connect.php';
 
-$servername = "x-stress.se.mysql";
-$username = "x_stress_se";
-$password = "hAYwYZMC";
-$dbname = "x_stress_se";
-
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+$conn = db_connect();
 $sql = "SELECT message, time FROM myposts";
 $result = $conn->query($sql);
 
