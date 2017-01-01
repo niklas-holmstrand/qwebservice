@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, message, time FROM myposts";
+$sql = "SELECT id, message, time FROM myposts ORDER BY id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

@@ -31,7 +31,9 @@ if ($conn->connect_error) {
 }
 
 $message=$_POST["Message"];
-$time=$_POST["Time"];
+//$time=$_POST["Time"];
+
+$time = date("Y-m-d h:i:sa");
 
 $sql = "INSERT INTO myposts (message, time)
 VALUES ('$message', '$time')";
