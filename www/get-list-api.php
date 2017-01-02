@@ -1,9 +1,3 @@
- <!DOCTYPE html>
-<html>
-<body>
-
-<h1>Alla poster:</h1>
-
 <?php
 include 'db-connect.php';
 
@@ -27,11 +21,10 @@ if ($result){
 
 $conn->close();
 
-echo "<pre>"; // for json pretty print
+echo '{ "children":';
 echo json_encode($return_arr, JSON_PRETTY_PRINT);
-echo "</pre>";
+echo '}';
 
 
 ?>
-</body>
-</html> 
+
