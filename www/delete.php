@@ -4,14 +4,22 @@
 
 
 <?php
-echo "Delete is not yet implemented <br/>";
-echo "to delete " . $_GET["id"] . " <br/>";
+echo "Deleting [" . $_GET["id"] . "] <br/>";
 
 include 'db-connect.php';
 
-$conn = db_connect();
-$sql = "DELETE FROM myposts WHERE id=" . $_GET["id"];
+$deleter=$_GET["Deleter"];
+if ($deleter == null) {   $deleter = "unknown"; };
 
+$time = date("Y-m-d H:i:s");
+
+
+//$sql = "DELETE FROM myposts WHERE id=" . $_GET["id"];
+$sql = "UPDATE myposts 
+SET deleted=true, deleter='$deleter', deletetime='$time' 
+WHERE id=" . $_GET["id"];
+
+$conn = db_connect();
 if (mysqli_query($conn, $sql)) {
     echo "Record deleted successfully";
 } else {
@@ -22,7 +30,8 @@ $conn->close();
 
 
 ?>
-
+<br/>
+<br/>
 <a href="index.html">Home</a>
 </body>
 </html> 

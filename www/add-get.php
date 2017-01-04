@@ -7,7 +7,7 @@
  <html>
 <body>
 
-Message to post: <?php echo $_POST["Message"]; ?><br>
+Message to post (GET): <?php echo $_GET["Message"]; ?><br>
 <!-- time: <?php echo $_POST["Time"]; ?> -->
 <br/>
 
@@ -20,14 +20,23 @@ Message to post: <?php echo $_POST["Message"]; ?><br>
 include 'db-connect.php';
 
 
-$message=$_POST["Message"];
+$message=$_GET["Message"];
 //$time=$_POST["Time"];
+$lat=$_GET["Lat"];
+$long=$_GET["Long"];
+$creator=$_GET["Creator"];
 
-$time = date("Y-m-d h:i:sa");
+if ($lat == null) {   $lat = "null"; };
+if ($long == null) {   $long = "null"; };
+if ($creator == null) { $creator = "unknown"; };
+
+
+$time = date("Y-m-d H:i:s");
+echo "Time $time <br/>";
 
 $conn = db_connect();
-$sql = "INSERT INTO myposts (message, time, deleted)
-VALUES ('$message', '$time',0)";
+$sql = "INSERT INTO myposts (message, time, latitude, longitude, creator, deleted)
+VALUES ('$message','$time',$lat,$long,'$creator',0)";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

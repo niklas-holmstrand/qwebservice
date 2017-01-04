@@ -8,23 +8,23 @@
 include 'db-connect.php';
 
 $conn = db_connect();
-$sql = "SELECT id, message, time FROM myposts ORDER BY id";
+$sql = "SELECT id, message, time FROM myposts WHERE deleted <> 1 ORDER BY id ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
         $msg = $row["message"];
-        echo "id: " . $row["id"]. " - Name: " . $msg . " " . $row["time"]. "  <a href=delete.php?id=" . $row["id"] . ">Delete</a><br>";
+        echo "id: " . $row["id"]. " - Text: " . $msg . " " . $row["time"]. " - <a href=delete.php?id=" . $row["id"] . "&Deleter=xtress>Delete</a><br>";
     }
 } else {
-    echo "0 results";
+    echo "List is empty";
 }
 $conn->close();
 
-echo ".........10 <br/>";
 
 ?>
+<br/>
 <a href="index.html">Home</a>
 </body>
 </html> 
